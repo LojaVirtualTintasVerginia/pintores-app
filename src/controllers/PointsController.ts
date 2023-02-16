@@ -77,8 +77,14 @@ class PointsController {
     };
 
     const insertedIds = await trx("points").insert(point);
+      if (insertedIds === undefined  ){
+            // Add a return:
+        return response.json({ erro: "id undefined "});
+      }
 
     const point_id = insertedIds[0];
+
+    console.log(point_id, "aqui itemsaaaa")
 
     const pointItems = items
       .split(",")
@@ -90,10 +96,6 @@ class PointsController {
         };
       });
       console.log(pointItems, "aqui items")
-      if (point_id === null  ){
-            // Add a return:
-      return response.json({ erro: "Something went wrong, try to reload the page."});
-      }
 
 
     await trx("point_items").insert(pointItems);
