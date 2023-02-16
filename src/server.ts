@@ -14,6 +14,6 @@ app.use("/uploads", express.static(path.resolve(__dirname, "..", "uploads")));
 
 app.use(errors());
 
-var port = process.env.PORT || 3333;
+var port = process.env.PORT || 3001;
 
 app.listen(port);

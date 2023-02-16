@@ -89,9 +89,12 @@ class PointsController {
           point_id,
         };
       });
-      if (pointItems < 0)
-    // Add a return:
+      console.log(pointItems, "aqui items")
+      if (pointItems < 0){
+            // Add a return:
       return response.json({ erro: "Something went wrong, try to reload the page."});
+      }
+
 
     await trx("point_items").insert(pointItems);
 
