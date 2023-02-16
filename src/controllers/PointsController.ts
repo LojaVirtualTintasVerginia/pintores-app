@@ -90,7 +90,7 @@ class PointsController {
         };
       });
       console.log(pointItems, "aqui items")
-      if (pointItems < 0){
+      if (point_id === null  ){
             // Add a return:
       return response.json({ erro: "Something went wrong, try to reload the page."});
       }
@@ -101,8 +101,7 @@ class PointsController {
     await trx.commit();
 
     return response.json({
-      id: point_id,
-      ...point,
+      id: point_id
     });
   }
 }
