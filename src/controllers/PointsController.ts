@@ -100,8 +100,7 @@ class PointsController {
 
     await trx.commit();
 
-    return response.json({
-      id: point_id
+    return response.json({mensage: "cadastrado"
     });
   }
 }
