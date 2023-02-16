@@ -76,16 +76,8 @@ class PointsController {
       uf,
     };
 
-    const insertedIds = await trx("points").insert(point);
-
-
-    const point_id = insertedIds[0];
-
-    console.log(point_id, "aqui itemsaaaa")
-    if (point_id === undefined  ){
-      // Add a return:
-  return response.json({ erro: "id undefined "});
-}
+    const insertedIds = await trx("points").insert(point).returning("id");
+    const point_id = insertedIds[0].id;
 
     const pointItems = items
       .split(",")
@@ -96,14 +88,14 @@ class PointsController {
           point_id,
         };
       });
-      console.log(pointItems, "aqui items")
-
 
     await trx("point_items").insert(pointItems);
 
     await trx.commit();
 
-    return response.json({mensage: "cadastrado"
+    return response.json({
+      id: point_id,
+      ...point,
     });
   }
 }
