@@ -77,14 +77,15 @@ class PointsController {
     };
 
     const insertedIds = await trx("points").insert(point);
-      if (insertedIds === undefined  ){
-            // Add a return:
-        return response.json({ erro: "id undefined "});
-      }
+
 
     const point_id = insertedIds[0];
 
     console.log(point_id, "aqui itemsaaaa")
+    if (point_id === undefined  ){
+      // Add a return:
+  return response.json({ erro: "id undefined "});
+}
 
     const pointItems = items
       .split(",")
