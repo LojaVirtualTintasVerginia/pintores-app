@@ -11,6 +11,8 @@ export async function up(knex: Knex) {
     table.decimal('longitude ').notNullable();
     table.string('city').notNullable();
     table.string('uf', 2).notNullable();
+    table.string('link_facebook').notNullable()
+    table.string('link_instagram').notNullable()
   })
 }
 
