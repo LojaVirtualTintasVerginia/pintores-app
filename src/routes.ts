@@ -21,17 +21,23 @@ routes.get("/points/:id", pointsController.show);
 /** Create Point */
 routes.post(
   "/points",
-  upload.single("image"),
+  upload.fields([
+    { name: 'image', maxCount: 1 },
+    { name: 'image2', maxCount: 1 },
+  ]),
   celebrate(
     {
       body: Joi.object().keys({
         name: Joi.string().required(),
         email: Joi.string().required().email(),
         whatsapp: Joi.number().required(),
-        latitude: Joi.number().required(),
-        longitude: Joi.number().required(),
+        resumo: Joi.string().required(),
+        cpf: Joi.string().required(),
         city: Joi.string().required(),
+        bairro: Joi.string().required(),
         uf: Joi.string().required().max(2),
+        link_facebook: Joi.string().required(),
+        link_instagram: Joi.string().required(),
         items: Joi.string().required(),
       }),
     },

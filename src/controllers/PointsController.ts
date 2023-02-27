@@ -51,53 +51,61 @@ class PointsController {
 
   async create(request: Request, response: Response) {
     const {
-      name,
       email,
+      name,
+      resumo,
+      cpf,
       whatsapp,
-      latitude,
-      longitude,
       city,
+      bairro,
       uf,
+      link_facebook,
+      link_instagram,
       items,
+      ativo
     } = request.body;
-
-    console.log(request.body);
 
     const trx = await knex.transaction();
 
     const point = {
-      image: request.file?.filename,
-      name,
+      image: request.files['image'][0].filename,
+      image2: request.files['image2'][0].filename,
       email,
+      name,
+      resumo,
+      cpf,
       whatsapp,
-      latitude,
-      longitude,
       city,
+      bairro,
       uf,
+      link_facebook,
+      link_instagram,
+
     };
 
     const insertedIds = await trx("points").insert(point).returning("id");
-    const point_id = insertedIds[0].id;
 
-    const pointItems = items
-      .split(",")
-      .map((item: string) => Number(item.trim()))
-      .map((item_id: number) => {
-        return {
-          item_id,
-          point_id,
-        };
-      });
+    const point_id = insertedIds[0];
 
-    await trx("point_items").insert(pointItems);
-
-    await trx.commit();
-
-    return response.json({
-      id: point_id,
-      ...point,
+     const pointItems = items
+    .split(",")
+    .map((item: string) => Number(item.trim()))
+    .map((item_id: number) => {
+      return {
+        item_id,
+        point_id,
+      };
     });
-  }
+
+  await trx("point_items").insert(pointItems);
+
+  await trx.commit();
+
+  return response.json({
+    id: point_id,
+    ...point,
+  });
+}
 }
 
 export default PointsController;
