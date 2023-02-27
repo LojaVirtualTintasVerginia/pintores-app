@@ -34,7 +34,6 @@ routes.post(
         resumo: Joi.string().required(),
         cpf: Joi.string().required(),
         city: Joi.string().required(),
-        bairro: Joi.string().required(),
         uf: Joi.string().required().max(2),
         link_facebook: Joi.string().required(),
         link_instagram: Joi.string().required(),
