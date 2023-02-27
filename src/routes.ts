@@ -25,23 +25,6 @@ routes.post(
     { name: 'image', maxCount: 1 },
     { name: 'image2', maxCount: 1 },
   ]),
-  celebrate(
-    {
-      body: Joi.object().keys({
-        name: Joi.string().required(),
-        email: Joi.string().required().email(),
-        whatsapp: Joi.number().required(),
-        resumo: Joi.string().required(),
-        cpf: Joi.string().required(),
-        city: Joi.string().required(),
-        uf: Joi.string().required().max(2),
-        link_facebook: Joi.string().required(),
-        link_instagram: Joi.string().required(),
-        items: Joi.string().required(),
-      }),
-    },
-    { abortEarly: false }
-  ),
   pointsController.create
 );
 
