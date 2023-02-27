@@ -57,7 +57,6 @@ class PointsController {
       cpf,
       whatsapp,
       city,
-      bairro,
       uf,
       link_facebook,
       link_instagram,
@@ -69,14 +68,13 @@ class PointsController {
 
     const point = {
       image: request.files['image'][0].filename,
-      obra: request.files['image2'][0].filename,
+      image2: request.files['image2'][0].filename,
       email,
       name,
       resumo,
       cpf,
       whatsapp,
       city,
-      bairro,
       uf,
       link_facebook,
       link_instagram,
